@@ -22,7 +22,7 @@ examples/embedded_cpp/embedded_cpp
 *.o
 VisualStudio/unit_test/*
 log.out
-
+.vscode/
 
 ################# //hash
 ## CMake
