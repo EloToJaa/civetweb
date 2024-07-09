@@ -10,15 +10,16 @@
 PROG = rest_server
 SRC = main.c
 
-CJSON_LIB = pkg/cJSON/cJSON.c pkg/cJSON/cJSON_Utils.c
+TOP_CJSON = pkg/cJSON
+CJSON_LIB = $(TOP_CJSON)/cJSON.c $(TOP_CJSON)/cJSON_Utils.c
 
-TOP = pkg/civetweb
+TOP_CIVETWEB = pkg/civetweb
 CIVETWEB_LIB = libcivetweb.a
 
-CFLAGS = -I$(TOP)/include -Ipkg/cJSON $(COPT) -DNO_FILES -DMG_EXPERIMENTAL_INTERFACES
+CFLAGS = -I$(TOP_CIVETWEB)/include -I$(TOP_CJSON) $(COPT) -DNO_FILES -DMG_EXPERIMENTAL_INTERFACES
 LIBS = -lpthread
 
-include $(TOP)/resources/Makefile.in-os
+include $(TOP_CIVETWEB)/resources/Makefile.in-os
 
 ifeq ($(TARGET_OS),LINUX)
 	LIBS += -ldl
@@ -30,8 +31,8 @@ $(PROG): $(CIVETWEB_LIB) $(CJSON_LIB) $(SRC)
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(SRC) $(CJSON_LIB) $(CIVETWEB_LIB) $(LIBS)
 
 $(CIVETWEB_LIB):
-	$(MAKE) -C $(TOP) WITH_IPV6=1 WITH_WEBSOCKET=1 COPT='-DNO_SSL -DMG_EXPERIMENTAL_INTERFACES' clean lib
-	cp $(TOP)/$(CIVETWEB_LIB) .
+	$(MAKE) -C $(TOP_CIVETWEB) WITH_IPV6=1 WITH_WEBSOCKET=1 COPT='-DNO_SSL -DMG_EXPERIMENTAL_INTERFACES' clean lib
+	cp $(TOP_CIVETWEB)/$(CIVETWEB_LIB) .
 
 clean:
 	rm -f $(CIVETWEB_LIB) $(PROG)
