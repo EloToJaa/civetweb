@@ -1,0 +1,32 @@
+rest_server
+.svn
+test
+*.o
+*.a
+*.so
+*.swp
+*.patch
+tags
+build/
+out
+*.dmg
+*.msi
+*.exe
+*.zip
+*.trace
+[oO]utput
+[tT]esting
+examples/embedded_c/embedded_c
+examples/embedded_cpp/embedded_cpp
+*.a
+*.o
+VisualStudio/unit_test/*
+log.out
+
+
+################# //hash
+## CMake
+#################
+/CMakeCache.txt
+/CMakeFiles
+/mingw-builds
