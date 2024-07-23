@@ -1,3 +1,3 @@
-# testweb
+# civetweb
 
 An example C Web API.
